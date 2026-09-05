@@ -1,4 +1,5 @@
 gradio>=5.0
+spaces
 transformers>=4.38
 torch
 Pillow

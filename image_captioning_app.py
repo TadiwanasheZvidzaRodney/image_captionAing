@@ -3,6 +3,8 @@
 import os
 
 import gradio as gr
+import spaces
+import torch
 from PIL import Image
 from transformers import AutoProcessor, BlipForConditionalGeneration
 
@@ -20,6 +22,7 @@ def load_captioning_model():
 processor, model = load_captioning_model()
 
 
+@spaces.GPU
 def caption_image(input_image: Image.Image | None) -> str:
     """Return a concise caption for an uploaded image."""
     if input_image is None:
@@ -27,7 +30,11 @@ def caption_image(input_image: Image.Image | None) -> str:
 
     image = input_image.convert("RGB")
     inputs = processor(images=image, return_tensors="pt")
-    output = model.generate(**inputs, max_new_tokens=50)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model.to(device)
+    inputs = {name: value.to(device) for name, value in inputs.items()}
+    with torch.inference_mode():
+        output = model.generate(**inputs, max_new_tokens=50)
     return processor.decode(output[0], skip_special_tokens=True)
 
 
