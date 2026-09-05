@@ -1,12 +1,14 @@
 ---
 title: Image Captioning with BLIP
-emoji: camera
+emoji: 📷
 colorFrom: blue
 colorTo: yellow
 sdk: gradio
 sdk_version: 6.26.0
+python_version: '3.12'
 app_file: app.py
 pinned: false
+short_description: Generate captions for uploaded images
 ---
 
 # Image Captioning with BLIP
