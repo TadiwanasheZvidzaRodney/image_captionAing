@@ -1,3 +1,14 @@
+---
+title: Image Captioning with BLIP
+emoji: camera
+colorFrom: blue
+colorTo: yellow
+sdk: gradio
+sdk_version: 6.26.0
+app_file: app.py
+pinned: false
+---
+
 # Image Captioning with BLIP
 
 Generate captions for uploaded images or images embedded in a web page using Hugging Face's `Salesforce/blip-image-captioning-base` model.
